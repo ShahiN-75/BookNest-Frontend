@@ -7,23 +7,6 @@
   color: #263238;
 }
 
-header {
-  background-color: #17324d;
-  color: white;
-  text-align: center;
-  padding: 35px 20px;
-}
-
-header h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
-
-header p {
-  margin: 0;
-  color: #dce6ee;
-}
-
 main {
   max-width: 1000px;
   margin: 40px auto;
