@@ -1,0 +1,53 @@
+
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #f5f7fb;
+  font-family: Arial, sans-serif;
+  color: #263238;
+}
+
+header {
+  background-color: #17324d;
+  color: white;
+  text-align: center;
+  padding: 35px 20px;
+}
+
+header h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+header p {
+  margin: 0;
+  color: #dce6ee;
+}
+
+main {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+section {
+  background-color: white;
+  padding: 30px;
+  margin-bottom: 25px;
+  border-radius: 10px;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
+}
+
+section h2 {
+  color: #17324d;
+}
+
+section p {
+  line-height: 1.7;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: #667788;
+}
