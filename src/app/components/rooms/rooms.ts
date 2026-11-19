@@ -28,4 +28,23 @@ export class Rooms implements OnInit {
     });
   }
 
+  filterByType(roomType: string): void {
+    this.errorMessage = '';
+
+    const request = roomType
+      ? this.roomDataService.searchRooms(roomType)
+      : this.roomDataService.getRooms();
+
+    request.subscribe({
+      next: (data) => {
+        this.rooms = data;
+      },
+      error: (error) => {
+        this.rooms = [];
+        this.errorMessage = 'Unable to search rooms. Please try again.';
+        console.error('Error searching rooms:', error);
+      }
+    });
+  }
+
 }

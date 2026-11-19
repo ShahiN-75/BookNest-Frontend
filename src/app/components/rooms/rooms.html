@@ -13,6 +13,27 @@
   <section class="rooms-list">
     <h2>Available Rooms ({{ rooms.length }})</h2>
 
+<div class="room-filter">
+  <label for="roomType">Filter by Room Type:</label>
+
+  <select
+    id="roomType"
+    #roomTypeSelect
+    (change)="filterByType(roomTypeSelect.value)">
+
+    <option value="">All Rooms</option>
+    <option value="Standard Double">Standard Double</option>
+    <option value="Standard Twin">Standard Twin</option>
+    <option value="Superior Double">Superior Double</option>
+    <option value="Deluxe Double">Deluxe Double</option>
+    <option value="Family Room">Family Room</option>
+    <option value="Executive Room">Executive Room</option>
+    <option value="Suite">Suite</option>
+
+  </select>
+</div>
+
+
     @if (errorMessage) {
       <p>{{ errorMessage }}</p>
     } @else {

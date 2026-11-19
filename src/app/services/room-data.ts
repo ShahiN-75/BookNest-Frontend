@@ -3,7 +3,6 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 export interface Room {
   room_id: number;
   room_number: string;
@@ -43,6 +42,14 @@ export class RoomDataService {
 
   getRooms(): Observable<Room[]> {
     return this.http.get<Room[]>(this.apiUrl);
+  }
+
+  searchRooms(roomType: string): Observable<Room[]> {
+    return this.http.get<Room[]>(`${this.apiUrl}/search`, {
+      params: {
+        room_type: roomType
+      }
+    });
   }
 
 }
