@@ -1,0 +1,66 @@
+
+<main class="rooms-container">
+
+  <section class="rooms-header">
+    <h1>Explore Our Rooms</h1>
+    <p>
+      Find the perfect room for your stay.
+      Browse our available rooms and choose
+      the one that suits your needs.
+    </p>
+  </section>
+
+  <section class="rooms-list">
+    <h2>Available Rooms ({{ rooms.length }})</h2>
+
+    @if (errorMessage) {
+      <p>{{ errorMessage }}</p>
+    } @else {
+
+      <div class="room-grid">
+
+        @for (room of rooms; track room.room_id) {
+
+          <article class="room-card">
+
+            <h3>
+              {{ room.room_type }} - Room {{ room.room_number }}
+            </h3>
+
+            <p>
+              {{ room.room_information.description || 'No description available.' }}
+            </p>
+
+            <p>
+              <strong>Maximum Guests:</strong>
+              {{ room.room_information.occupancy.maximum_guests }}
+            </p>
+
+            <p>
+              <strong>Price:</strong>
+
+              @if (room.pricing.rate_plans[0]; as ratePlan) {
+                £{{ ratePlan.rate_details.base_price_per_night }} per night
+              } @else {
+                Price unavailable
+              }
+            </p>
+
+            <p>
+              <strong>Status:</strong>
+              {{ room.room_management.availability.current_status }}
+            </p>
+
+          </article>
+
+        } @empty {
+          <p>No rooms to display.</p>
+        }
+
+      </div>
+
+    }
+
+  </section>
+
+</main>
