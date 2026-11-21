@@ -28,23 +28,54 @@ export class Rooms implements OnInit {
     });
   }
 
-  filterByType(roomType: string): void {
-    this.errorMessage = '';
+  
 
-    const request = roomType
-      ? this.roomDataService.searchRooms(roomType)
-      : this.roomDataService.getRooms();
+filterByType(
+  roomType: string,
+  priceInput: string = '',
+  guestsInput: string = ''
+): void {
 
-    request.subscribe({
-      next: (data) => {
-        this.rooms = data;
-      },
-      error: (error) => {
-        this.rooms = [];
-        this.errorMessage = 'Unable to search rooms. Please try again.';
-        console.error('Error searching rooms:', error);
-      }
-    });
+  this.errorMessage = '';
+
+  const maxPrice = priceInput.trim() === ''
+    ? undefined
+    : Number(priceInput);
+
+  const guests = guestsInput.trim() === ''
+    ? undefined
+    : Number(guestsInput);
+
+  if (maxPrice !== undefined &&
+      (!Number.isFinite(maxPrice) || maxPrice < 0)) {
+    this.errorMessage = 'Please enter a valid maximum price.';
+    return;
   }
+
+  if (guests !== undefined &&
+      (!Number.isInteger(guests) || guests < 1)) {
+    this.errorMessage = 'Please enter a valid number of guests.';
+    return;
+  }
+
+  const request = !roomType &&
+                  maxPrice === undefined &&
+                  guests === undefined
+    ? this.roomDataService.getRooms()
+    : this.roomDataService.searchRooms(roomType, maxPrice, guests);
+
+  request.subscribe({
+    next: (data) => {
+      this.rooms = data;
+    },
+    error: (error) => {
+      this.rooms = [];
+      this.errorMessage = 'Unable to search rooms. Please try again.';
+      console.error('Error searching rooms:', error);
+    }
+  });
+}
+
+
 
 }

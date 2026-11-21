@@ -142,3 +142,80 @@
     width: 100%;
   }
 }
+
+.room-filter {
+  flex-wrap: wrap;
+}
+
+.room-filter input {
+  padding: 10px 15px;
+  width: 180px;
+  border: 1px solid #ccd6e0;
+  border-radius: 6px;
+  background-color: #ffffff;
+  color: #263238;
+  font-size: 15px;
+}
+
+.room-filter input:focus {
+  outline: 2px solid #3178b8;
+  outline-offset: 2px;
+}
+
+.room-filter button {
+  background-color: #17324d;
+  color: white;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.room-filter button:hover {
+  background-color: #28547a;
+}
+
+.room-filter button:focus-visible {
+  outline: 2px solid #3178b8;
+  outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+  .room-filter input,
+  .room-filter button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.room-filter {
+  align-items: end;
+  gap: 20px;
+}
+
+.filter-field input,
+.filter-field select {
+  width: 220px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+  .filter-field {
+    width: 100%;
+  }
+
+  .filter-field input,
+  .filter-field select {
+    width: 100%;
+  }
+}

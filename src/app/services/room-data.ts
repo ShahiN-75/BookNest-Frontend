@@ -1,6 +1,6 @@
 
 import { Injectable, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Room {
@@ -44,12 +44,31 @@ export class RoomDataService {
     return this.http.get<Room[]>(this.apiUrl);
   }
 
-  searchRooms(roomType: string): Observable<Room[]> {
-    return this.http.get<Room[]>(`${this.apiUrl}/search`, {
-      params: {
-        room_type: roomType
-      }
-    });
+  
+searchRooms(
+  roomType: string,
+  maxPrice?: number,
+  guests?: number
+): Observable<Room[]> {
+
+  let params = new HttpParams();
+
+  if (roomType) {
+    params = params.set('room_type', roomType);
   }
+
+  if (maxPrice !== undefined) {
+    params = params.set('max_price', maxPrice.toString());
+  }
+
+  if (guests !== undefined) {
+    params = params.set('guests', guests.toString());
+  }
+
+  return this.http.get<Room[]>(`${this.apiUrl}/search`, {
+    params: params
+  });
+}
+
 
 }

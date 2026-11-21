@@ -13,25 +13,64 @@
   <section class="rooms-list">
     <h2>Available Rooms ({{ rooms.length }})</h2>
 
+
+
 <div class="room-filter">
-  <label for="roomType">Filter by Room Type:</label>
 
-  <select
-    id="roomType"
-    #roomTypeSelect
-    (change)="filterByType(roomTypeSelect.value)">
+  <div class="filter-field">
+    <label for="roomType">Room Type:</label>
 
-    <option value="">All Rooms</option>
-    <option value="Standard Double">Standard Double</option>
-    <option value="Standard Twin">Standard Twin</option>
-    <option value="Superior Double">Superior Double</option>
-    <option value="Deluxe Double">Deluxe Double</option>
-    <option value="Family Room">Family Room</option>
-    <option value="Executive Room">Executive Room</option>
-    <option value="Suite">Suite</option>
+    <select id="roomType" #roomTypeSelect>
+      <option value="">All Rooms</option>
+      <option value="Standard Double">Standard Double</option>
+      <option value="Standard Twin">Standard Twin</option>
+      <option value="Superior Double">Superior Double</option>
+      <option value="Deluxe Double">Deluxe Double</option>
+      <option value="Family Room">Family Room</option>
+      <option value="Executive Room">Executive Room</option>
+      <option value="Suite">Suite</option>
+    </select>
+  </div>
 
-  </select>
+  <div class="filter-field">
+    <label for="maxPrice">Maximum Price (£):</label>
+
+    <input
+      type="number"
+      id="maxPrice"
+      min="0"
+      step="1"
+      placeholder="e.g. 150"
+      #maxPriceInput
+    />
+  </div>
+
+  <div class="filter-field">
+    <label for="guests">Number of Guests:</label>
+
+    <input
+      type="number"
+      id="guests"
+      min="1"
+      step="1"
+      placeholder="e.g. 2"
+      #guestsInput
+    />
+  </div>
+
+  <button
+    type="button"
+    (click)="filterByType(
+      roomTypeSelect.value,
+      maxPriceInput.value,
+      guestsInput.value
+    )">
+    Search Rooms
+  </button>
+
 </div>
+
+
 
 
     @if (errorMessage) {
