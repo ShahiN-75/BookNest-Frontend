@@ -24,6 +24,16 @@ export interface Room {
     }[];
   };
 
+  facilities?: {
+    amenity_groups: {
+      category: string;
+      items: {
+        name: string;
+        available: boolean;
+      }[];
+    }[];
+  };
+
   room_management: {
     availability: {
       current_status: string;
@@ -44,31 +54,33 @@ export class RoomDataService {
     return this.http.get<Room[]>(this.apiUrl);
   }
 
-  
-searchRooms(
-  roomType: string,
-  maxPrice?: number,
-  guests?: number
-): Observable<Room[]> {
+  searchRooms(
+    roomType: string,
+    maxPrice?: number,
+    guests?: number
+  ): Observable<Room[]> {
 
-  let params = new HttpParams();
+    let params = new HttpParams();
 
-  if (roomType) {
-    params = params.set('room_type', roomType);
+    if (roomType) {
+      params = params.set('room_type', roomType);
+    }
+
+    if (maxPrice !== undefined) {
+      params = params.set('max_price', maxPrice.toString());
+    }
+
+    if (guests !== undefined) {
+      params = params.set('guests', guests.toString());
+    }
+
+    return this.http.get<Room[]>(`${this.apiUrl}/search`, {
+      params: params
+    });
   }
 
-  if (maxPrice !== undefined) {
-    params = params.set('max_price', maxPrice.toString());
+  getRoomById(roomId: number): Observable<Room> {
+    return this.http.get<Room>(`${this.apiUrl}/${roomId}`);
   }
-
-  if (guests !== undefined) {
-    params = params.set('guests', guests.toString());
-  }
-
-  return this.http.get<Room[]>(`${this.apiUrl}/search`, {
-    params: params
-  });
-}
-
 
 }

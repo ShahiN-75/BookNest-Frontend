@@ -1,13 +1,22 @@
+
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
-import { RoomData } from './room-data';
+import { RoomDataService } from './room-data';
 
-describe('RoomData', () => {
-  let service: RoomData;
+describe('RoomDataService', () => {
+  let service: RoomDataService;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    service = TestBed.inject(RoomData);
+    TestBed.configureTestingModule({
+      providers: [
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ]
+    });
+
+    service = TestBed.inject(RoomDataService);
   });
 
   it('should be created', () => {

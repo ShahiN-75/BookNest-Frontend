@@ -219,3 +219,25 @@
     width: 100%;
   }
 }
+
+.details-link {
+  display: inline-block;
+  background-color: #17324d;
+  color: white;
+  padding: 11px 20px;
+  margin-top: 15px;
+  border-radius: 6px;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.details-link:hover {
+  background-color: #28547a;
+}
+
+.details-link:focus-visible {
+  outline: 2px solid #3178b8;
+  outline-offset: 3px;
+}

@@ -1,10 +1,12 @@
 
 import { Component, OnInit, inject } from '@angular/core';
 import { Room, RoomDataService } from '../../services/room-data';
+import { RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-rooms',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css'
 })

@@ -111,6 +111,11 @@
               {{ room.room_management.availability.current_status }}
             </p>
 
+            <a [routerLink]="['/rooms', room.room_id]" class="details-link">
+            View Details
+            </a>
+
+
           </article>
 
         } @empty {

@@ -1,0 +1,101 @@
+
+<main class="room-details-container">
+
+    <a routerLink="/rooms" class="back-link">
+    ← Back to Rooms
+    </a>
+
+
+  @if (isLoading) {
+    <p>Loading room details...</p>
+  } @else if (errorMessage) {
+    <p>{{ errorMessage }}</p>
+  } @else if (room; as selectedRoom) {
+
+    <section class="room-details">
+
+      <h1>
+        {{ selectedRoom.room_type }} - Room {{ selectedRoom.room_number }}
+      </h1>
+
+      <p>
+        {{ selectedRoom.room_information.description || 'No description available.' }}
+      </p>
+
+      <h2>Room Information</h2>
+
+      <p>
+        <strong>Room Number:</strong>
+        {{ selectedRoom.room_number }}
+      </p>
+
+      <p>
+        <strong>Room Type:</strong>
+        {{ selectedRoom.room_type }}
+      </p>
+
+      <p>
+        <strong>Maximum Guests:</strong>
+        {{ selectedRoom.room_information.occupancy.maximum_guests }}
+      </p>
+
+      <h2>Pricing</h2>
+
+      @if (selectedRoom.pricing.rate_plans[0]; as ratePlan) {
+        <p>
+          <strong>Rate Plan:</strong>
+          {{ ratePlan.plan_name }}
+        </p>
+
+        <p>
+          <strong>Price:</strong>
+          £{{ ratePlan.rate_details.base_price_per_night }} per night
+        </p>
+      } @else {
+        <p>Pricing information is unavailable.</p>
+      }
+
+<h2>Room Amenities</h2>
+
+@if (selectedRoom.facilities?.amenity_groups; as amenityGroups) {
+
+  @for (group of amenityGroups; track group.category) {
+
+    <div class="amenity-group">
+
+      <h3>{{ group.category }}</h3>
+
+      <ul>
+        @for (item of group.items; track item.name) {
+          <li>
+            {{ item.name }} -
+            {{ item.available ? 'Available' : 'Unavailable' }}
+          </li>
+        }
+      </ul>
+
+    </div>
+
+  } @empty {
+    <p>No amenities listed for this room.</p>
+  }
+
+} @else {
+  <p>Amenity information is unavailable.</p>
+}
+
+
+      <h2>Availability</h2>
+
+      <p>
+        <strong>Current Status:</strong>
+        {{ selectedRoom.room_management.availability.current_status }}
+      </p>
+
+    </section>
+
+  } @else {
+    <p>Room details are unavailable.</p>
+  }
+
+</main>
