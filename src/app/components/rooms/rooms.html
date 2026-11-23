@@ -13,65 +13,60 @@
   <section class="rooms-list">
     <h2>Available Rooms ({{ rooms.length }})</h2>
 
+    <div class="room-filter">
 
+      <div class="filter-field">
+        <label for="roomType">Room Type:</label>
 
-<div class="room-filter">
+        <select id="roomType" #roomTypeSelect>
+          <option value="">All Rooms</option>
+          <option value="Standard Double">Standard Double</option>
+          <option value="Standard Twin">Standard Twin</option>
+          <option value="Superior Double">Superior Double</option>
+          <option value="Deluxe Double">Deluxe Double</option>
+          <option value="Family Room">Family Room</option>
+          <option value="Executive Room">Executive Room</option>
+          <option value="Suite">Suite</option>
+        </select>
+      </div>
 
-  <div class="filter-field">
-    <label for="roomType">Room Type:</label>
+      <div class="filter-field">
+        <label for="maxPrice">Maximum Price (£):</label>
 
-    <select id="roomType" #roomTypeSelect>
-      <option value="">All Rooms</option>
-      <option value="Standard Double">Standard Double</option>
-      <option value="Standard Twin">Standard Twin</option>
-      <option value="Superior Double">Superior Double</option>
-      <option value="Deluxe Double">Deluxe Double</option>
-      <option value="Family Room">Family Room</option>
-      <option value="Executive Room">Executive Room</option>
-      <option value="Suite">Suite</option>
-    </select>
-  </div>
+        <input
+          type="number"
+          id="maxPrice"
+          min="0"
+          step="1"
+          placeholder="e.g. 150"
+          #maxPriceInput
+        />
+      </div>
 
-  <div class="filter-field">
-    <label for="maxPrice">Maximum Price (£):</label>
+      <div class="filter-field">
+        <label for="guests">Number of Guests:</label>
 
-    <input
-      type="number"
-      id="maxPrice"
-      min="0"
-      step="1"
-      placeholder="e.g. 150"
-      #maxPriceInput
-    />
-  </div>
+        <input
+          type="number"
+          id="guests"
+          min="1"
+          step="1"
+          placeholder="e.g. 2"
+          #guestsInput
+        />
+      </div>
 
-  <div class="filter-field">
-    <label for="guests">Number of Guests:</label>
+      <button
+        type="button"
+        (click)="filterByType(
+          roomTypeSelect.value,
+          maxPriceInput.value,
+          guestsInput.value
+        )">
+        Search Rooms
+      </button>
 
-    <input
-      type="number"
-      id="guests"
-      min="1"
-      step="1"
-      placeholder="e.g. 2"
-      #guestsInput
-    />
-  </div>
-
-  <button
-    type="button"
-    (click)="filterByType(
-      roomTypeSelect.value,
-      maxPriceInput.value,
-      guestsInput.value
-    )">
-    Search Rooms
-  </button>
-
-</div>
-
-
-
+    </div>
 
     @if (errorMessage) {
       <p>{{ errorMessage }}</p>
@@ -79,7 +74,7 @@
 
       <div class="room-grid">
 
-        @for (room of rooms; track room.room_id) {
+        @for (room of paginatedRooms; track room.room_id) {
 
           <article class="room-card">
 
@@ -111,10 +106,11 @@
               {{ room.room_management.availability.current_status }}
             </p>
 
-            <a [routerLink]="['/rooms', room.room_id]" class="details-link">
-            View Details
+            <a
+              [routerLink]="['/rooms', room.room_id]"
+              class="details-link">
+              View Details
             </a>
-
 
           </article>
 
@@ -123,6 +119,31 @@
         }
 
       </div>
+
+      <!-- Pagination controls -->
+      @if (totalPages > 1) {
+        <div class="pagination">
+
+          <button
+            type="button"
+            (click)="previousPage()"
+            [disabled]="currentPage === 1">
+            Previous
+          </button>
+
+          <span>
+            Page {{ currentPage }} of {{ totalPages }}
+          </span>
+
+          <button
+            type="button"
+            (click)="nextPage()"
+            [disabled]="currentPage === totalPages">
+            Next
+          </button>
+
+        </div>
+      }
 
     }
 
