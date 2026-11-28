@@ -1,0 +1,90 @@
+
+<main class="auth-page">
+
+  <section class="auth-panel">
+
+    <p class="auth-eyebrow">BOOKNEST</p>
+
+    <h1>Welcome Back</h1>
+
+    <p class="auth-subtitle">
+      Sign in to manage your hotel bookings.
+    </p>
+
+    @if (registered) {
+      <p class="auth-success">
+        Account created successfully! Please log in.
+      </p>
+    }
+
+    @if (errorMessage) {
+      <p class="auth-error" role="alert">
+        {{ errorMessage }}
+      </p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+      <label for="login-email">Email Address</label>
+
+      <input
+        id="login-email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+
+      @if (
+        form.controls.email.touched &&
+        form.controls.email.invalid
+      ) {
+        <small class="field-error">
+          Please enter a valid email address.
+        </small>
+      }
+
+      <label for="login-password">Password</label>
+
+      <input
+        id="login-password"
+        type="password"
+        formControlName="password"
+        placeholder="Enter your password"
+        autocomplete="current-password"
+      />
+
+      @if (
+        form.controls.password.touched &&
+        form.controls.password.invalid
+      ) {
+        <small class="field-error">
+          Password is required.
+        </small>
+      }
+
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Signing In...' : 'Login' }}
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+    <a routerLink="/forgot-password">
+        Forgot your password?
+    </a>
+    </p>
+
+
+    <p class="auth-footer">
+      Don't have an account?
+      <a routerLink="/register">Register Here</a>
+    </p>
+
+    <p class="auth-footer">
+      <a routerLink="/rooms">Back to Rooms</a>
+    </p>
+
+  </section>
+
+</main>

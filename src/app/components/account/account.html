@@ -1,0 +1,67 @@
+
+<main class="auth-page">
+
+  <section class="auth-panel">
+
+    <p class="auth-eyebrow">BOOKNEST</p>
+
+    <h1>My Account</h1>
+
+    @if (isLoading) {
+
+      <p>Loading your account...</p>
+
+    } @else if (errorMessage) {
+
+      <p class="auth-error" role="alert">
+        {{ errorMessage }}
+      </p>
+
+    } @else if (profile; as user) {
+
+      <p class="auth-subtitle">
+        Welcome,
+        {{ user.profile.personal_details.first_name }}!
+      </p>
+
+      <div class="profile-fields">
+
+        <p>
+          <strong>Full Name:</strong>
+          {{ user.profile.personal_details.first_name }}
+          {{ user.profile.personal_details.last_name }}
+        </p>
+
+        <p>
+          <strong>Email:</strong>
+          {{ user.profile.contact.email }}
+        </p>
+
+        <p>
+          <strong>User ID:</strong>
+          {{ user.user_id }}
+        </p>
+
+        <p>
+          <strong>Role:</strong>
+          {{ user.account.role }}
+        </p>
+
+      </div>
+
+    }
+
+    <button
+      type="button"
+      (click)="logout()"
+      [disabled]="isLoggingOut">
+      {{ isLoggingOut ? 'Logging Out...' : 'Logout' }}
+    </button>
+
+    <p class="auth-footer">
+      <a routerLink="/rooms">Back to Rooms</a>
+    </p>
+
+  </section>
+
+</main>

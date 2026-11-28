@@ -1,11 +1,38 @@
 
 <nav class="navbar">
+
   <div class="navbar-brand">
     <a routerLink="/">BookNest</a>
   </div>
 
   <div class="navbar-links">
+
     <a routerLink="/">Home</a>
+
     <a routerLink="/rooms">Rooms</a>
+
+    @if (auth.currentUser()) {
+
+      <!-- Navigation for logged-in users -->
+      <a routerLink="/account">My Account</a>
+
+      <button
+        type="button"
+        class="nav-logout"
+        (click)="logout()"
+        [disabled]="isLoggingOut">
+        {{ isLoggingOut ? 'Logging Out...' : 'Logout' }}
+      </button>
+
+    } @else {
+
+      <!-- Navigation for visitors -->
+      <a routerLink="/login">Login</a>
+
+      <a routerLink="/register">Register</a>
+
+    }
+
   </div>
+
 </nav>

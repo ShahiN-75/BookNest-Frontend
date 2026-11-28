@@ -44,3 +44,49 @@
     gap: 12px;
   }
 }
+
+/* Logout button matches navigation links */
+
+.nav-logout {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.nav-logout:hover {
+  text-decoration: underline;
+}
+
+.nav-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.nav-logout:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 4px;
+}
+
+/* Logout button styling */
+
+.navbar .navbar-links .nav-logout {
+  background: transparent;
+  border: none;
+  color: #ffffff;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+}
+
+.navbar .navbar-links .nav-logout:hover {
+  color: #dbeafe;
+  text-decoration: underline;
+}
+
+.navbar .navbar-links .nav-logout:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

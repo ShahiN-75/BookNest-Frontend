@@ -1,0 +1,130 @@
+
+<main class="auth-page">
+
+  <section class="auth-panel">
+
+    <p class="auth-eyebrow">BOOKNEST</p>
+
+    <h1>Create Your Account</h1>
+
+    <p class="auth-subtitle">
+      Join BookNest and start managing your hotel stays.
+    </p>
+
+    @if (errorMessage) {
+      <p class="auth-error" role="alert">
+        {{ errorMessage }}
+      </p>
+    }
+
+    <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+
+      <label for="first-name">First Name</label>
+
+      <input
+        id="first-name"
+        type="text"
+        formControlName="first_name"
+        placeholder="Enter your first name"
+        autocomplete="given-name"
+      />
+
+      @if (
+        form.controls.first_name.touched &&
+        form.controls.first_name.invalid
+      ) {
+        <small class="field-error">
+          First name is required (maximum 100 characters).
+        </small>
+      }
+
+      <label for="last-name">Last Name</label>
+
+      <input
+        id="last-name"
+        type="text"
+        formControlName="last_name"
+        placeholder="Enter your last name"
+        autocomplete="family-name"
+      />
+
+      @if (
+        form.controls.last_name.touched &&
+        form.controls.last_name.invalid
+      ) {
+        <small class="field-error">
+          Last name is required (maximum 100 characters).
+        </small>
+      }
+
+      <label for="register-email">Email Address</label>
+
+      <input
+        id="register-email"
+        type="email"
+        formControlName="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      />
+
+      @if (
+        form.controls.email.touched &&
+        form.controls.email.invalid
+      ) {
+        <small class="field-error">
+          Enter a valid email address.
+        </small>
+      }
+
+      <label for="register-password">Password</label>
+
+      <input
+        id="register-password"
+        type="password"
+        formControlName="password"
+        placeholder="Minimum 8 characters"
+        autocomplete="new-password"
+      />
+
+      @if (
+        form.controls.password.touched &&
+        form.controls.password.invalid
+      ) {
+        <small class="field-error">
+          Password must contain at least 8 characters.
+        </small>
+      }
+
+      <label for="confirm-password">Confirm Password</label>
+
+      <input
+        id="confirm-password"
+        type="password"
+        formControlName="confirmPassword"
+        placeholder="Confirm your password"
+        autocomplete="new-password"
+      />
+
+      @if (
+        form.controls.confirmPassword.touched &&
+        form.controls.confirmPassword.invalid
+      ) {
+        <small class="field-error">
+          Please confirm your password.
+        </small>
+      }
+
+      <button type="submit" [disabled]="isSubmitting">
+        {{ isSubmitting ? 'Creating Account...' : 'Register' }}
+      </button>
+
+    </form>
+
+    <p class="auth-footer">
+      Already have an account?
+      <a routerLink="/login">Login Here</a>
+    </p>
+
+  </section>
+
+</main>
