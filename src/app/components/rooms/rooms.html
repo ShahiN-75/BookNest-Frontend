@@ -78,6 +78,14 @@
 
           <article class="room-card">
 
+            <!-- Display image based on room type -->
+            <img
+              [src]="getRoomImage(room.room_type)"
+              [alt]="'Representative ' + room.room_type + ' room interior'"
+              class="room-image"
+              loading="lazy"
+            />
+
             <h3>
               {{ room.room_type }} - Room {{ room.room_number }}
             </h3>

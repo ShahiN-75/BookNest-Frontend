@@ -105,3 +105,31 @@
   outline: 2px solid #3178b8;
   outline-offset: 3px;
 }
+/* Room Details Image */
+
+.room-detail-image {
+  width: 100%;
+  max-height: 420px;
+  object-fit: cover;
+  display: block;
+  border-radius: 12px;
+  margin-top: 20px;
+  margin-bottom: 8px;
+}
+
+/* Image Description */
+
+.room-image-note {
+  color: #64748b;
+  font-size: 13px;
+  margin-bottom: 20px;
+}
+
+/* Mobile Responsive Image */
+
+@media (max-width: 600px) {
+  .room-detail-image {
+    max-height: 260px;
+    border-radius: 8px;
+  }
+}

@@ -26,7 +26,6 @@ export class Rooms implements OnInit {
 
   get paginatedRooms(): Room[] {
     const startIndex = (this.currentPage - 1) * this.pageSize;
-
     return this.rooms.slice(startIndex, startIndex + this.pageSize);
   }
 
@@ -56,6 +55,7 @@ export class Rooms implements OnInit {
     });
   }
 
+  // Filter rooms by type, price and guest capacity
   filterByType(
     roomType: string,
     priceInput: string = '',
@@ -108,4 +108,23 @@ export class Rooms implements OnInit {
       }
     });
   }
+
+  // Select the correct image based on room type
+  getRoomImage(roomType: string): string {
+    const roomImages: Record<string, string> = {
+      'Standard Double': 'standard-double.jpg',
+      'Standard Twin': 'standard-twin.jpg',
+      'Superior Double': 'superior-double.jpg',
+      'Deluxe Double': 'deluxe-double.jpg',
+      'Family Room': 'family-room.jpg',
+      'Executive Room': 'executive-room.jpg',
+      'Suite': 'suite.jpg'
+    };
+
+    const imageName =
+      roomImages[roomType] || 'standard-double.jpg';
+
+    return `/images/rooms/${imageName}`;
+  }
+
 }

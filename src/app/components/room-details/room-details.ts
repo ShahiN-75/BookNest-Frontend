@@ -1,8 +1,7 @@
 
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Room, RoomDataService } from '../../services/room-data';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-room-details',
@@ -41,6 +40,24 @@ export class RoomDetails implements OnInit {
         console.error('Error loading room:', error);
       }
     });
+  }
+
+  // Select the correct image based on room type
+  getRoomImage(roomType: string): string {
+    const roomImages: Record<string, string> = {
+      'Standard Double': 'standard-double.jpg',
+      'Standard Twin': 'standard-twin.jpg',
+      'Superior Double': 'superior-double.jpg',
+      'Deluxe Double': 'deluxe-double.jpg',
+      'Family Room': 'family-room.jpg',
+      'Executive Room': 'executive-room.jpg',
+      'Suite': 'suite.jpg'
+    };
+
+    const imageName =
+      roomImages[roomType] || 'standard-double.jpg';
+
+    return `/images/rooms/${imageName}`;
   }
 
 }

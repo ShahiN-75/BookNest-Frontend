@@ -1,15 +1,16 @@
 
 <main class="room-details-container">
 
-    <a routerLink="/rooms" class="back-link">
+  <a routerLink="/rooms" class="back-link">
     ← Back to Rooms
-    </a>
-
+  </a>
 
   @if (isLoading) {
     <p>Loading room details...</p>
+
   } @else if (errorMessage) {
     <p>{{ errorMessage }}</p>
+
   } @else if (room; as selectedRoom) {
 
     <section class="room-details">
@@ -18,10 +19,24 @@
         {{ selectedRoom.room_type }} - Room {{ selectedRoom.room_number }}
       </h1>
 
+      <!-- Room Image -->
+      <img
+        [src]="getRoomImage(selectedRoom.room_type)"
+        [alt]="'Representative ' + selectedRoom.room_type + ' room interior'"
+        class="room-detail-image"
+        decoding="async"
+      />
+
+      <p class="room-image-note">
+        Image is representative of this room category.
+      </p>
+
+      <!-- Room Description -->
       <p>
         {{ selectedRoom.room_information.description || 'No description available.' }}
       </p>
 
+      <!-- Room Information -->
       <h2>Room Information</h2>
 
       <p>
@@ -39,6 +54,7 @@
         {{ selectedRoom.room_information.occupancy.maximum_guests }}
       </p>
 
+      <!-- Pricing -->
       <h2>Pricing</h2>
 
       @if (selectedRoom.pricing.rate_plans[0]; as ratePlan) {
@@ -55,36 +71,37 @@
         <p>Pricing information is unavailable.</p>
       }
 
-<h2>Room Amenities</h2>
+      <!-- Room Amenities -->
+      <h2>Room Amenities</h2>
 
-@if (selectedRoom.facilities?.amenity_groups; as amenityGroups) {
+      @if (selectedRoom.facilities?.amenity_groups; as amenityGroups) {
 
-  @for (group of amenityGroups; track group.category) {
+        @for (group of amenityGroups; track group.category) {
 
-    <div class="amenity-group">
+          <div class="amenity-group">
 
-      <h3>{{ group.category }}</h3>
+            <h3>{{ group.category }}</h3>
 
-      <ul>
-        @for (item of group.items; track item.name) {
-          <li>
-            {{ item.name }} -
-            {{ item.available ? 'Available' : 'Unavailable' }}
-          </li>
+            <ul>
+              @for (item of group.items; track item.name) {
+                <li>
+                  {{ item.name }} -
+                  {{ item.available ? 'Available' : 'Unavailable' }}
+                </li>
+              }
+            </ul>
+
+          </div>
+
+        } @empty {
+          <p>No amenities listed for this room.</p>
         }
-      </ul>
 
-    </div>
+      } @else {
+        <p>Amenity information is unavailable.</p>
+      }
 
-  } @empty {
-    <p>No amenities listed for this room.</p>
-  }
-
-} @else {
-  <p>Amenity information is unavailable.</p>
-}
-
-
+      <!-- Room Availability -->
       <h2>Availability</h2>
 
       <p>
